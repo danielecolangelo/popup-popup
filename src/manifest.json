@@ -2,5 +2,15 @@
 	"manifest_version" : 2,
 	"name"             : "Popup Popup",
 	"version"          : "0.1.0",
-	"description"      : "Open any URL in a popup"
+	"description"      : "Open any URL in a popup",
+	"background"       : {
+		"scripts" : [
+			"background.js"
+		]
+	},
+	"permissions" : [
+		"menus",
+		"contextMenus",
+		"activeTab"
+	]
 }
