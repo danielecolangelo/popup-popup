@@ -1,4 +1,6 @@
-
+/**
+ * Contextual menu to create popup from a link
+ */
 browser.menus.create({
 	id       : 'popup-popup-contextMenus-link',
 	title    : 'Open in a Popup',
@@ -16,6 +18,9 @@ browser.menus.create({
 	},
 });
 
+/**
+ * Contextual menu to move a tab into a popup
+ */
 browser.menus.create({
 	id       : 'popup-popup-contextMenus-tab',
 	title    : 'Move in a Popup',
