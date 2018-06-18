@@ -3,6 +3,9 @@
 	"name"             : "Popup Popup",
 	"version"          : "0.1.0",
 	"description"      : "Open any URL in a popup",
+	"icons"            : {
+		"16" : "icons/fi-arrows-out.svg"
+	},
 	"background"       : {
 		"scripts" : [
 			"background.js"
