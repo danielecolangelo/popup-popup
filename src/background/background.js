@@ -6,12 +6,14 @@ browser.menus.create({
 	title    : 'Open in a Popup',
 	contexts : ['link'],
 	onclick  : (info,tab) => {
-		browser.windows.create({
-			url    : info.linkUrl,
-			type   : 'popup',
-			height : 360,
-			width  : 640
-		});
+		getOptions().then( options => {
+			browser.windows.create({
+				url    : info.linkUrl,
+				type   : 'popup',
+				height : parseInt(options['popup-height']),
+				width  : parseInt(options['popup-width'])
+			});
+		} )
 	},
 });
 

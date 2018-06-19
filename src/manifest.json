@@ -8,14 +8,19 @@
 	},
 	"background"       : {
 		"scripts" : [
+			"lib/options.js",
 			"background/functions.js",
 			"background/background.js"
 		]
+	},
+	"options_ui" : {
+		"page" : "options/options.html"
 	},
 	"permissions" : [
 		"menus",
 		"contextMenus",
 		"activeTab",
-		"tabs"
+		"tabs",
+		"storage"
 	]
 }

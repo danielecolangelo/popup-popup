@@ -32,11 +32,13 @@ var createMoveBack     = function(w) {
  * Move to popup
  */
 var moveToPopup = function(info,tab){
-	browser.windows.create({
-		type   : 'popup',
-		tabId  : tab.id,
-		height : 360,
-		width  : 640
+	getOptions().then( options => {
+		browser.windows.create({
+			type   : 'popup',
+			tabId  : tab.id,
+			height : parseInt(options['popup-height']),
+			width  : parseInt(options['popup-width'])
+		});
 	});
 }
 
