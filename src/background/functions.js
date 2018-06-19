@@ -64,7 +64,8 @@ var moveToWindow = function(info,tab){
 		browser.windows.getAll({
 			windowTypes : ['normal']
 		}).then( windowList => {
-			if( windowList ){
+			if( windowList.length > 0 ){
+				console.log(windowList)
 				let w = windowList[windowList.length - 1];
 				move(w)
 			} else {
