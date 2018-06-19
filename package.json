@@ -7,7 +7,9 @@
     "web-ext": "^2.7.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fx-run" : "web-ext run --verbose -s src -u https://github.com/danielecolangelo/popup-popup/",
+    "fx-build" : "web-ext build --verbose -s src -a builds/firefox"
   },
   "repository": {
     "type": "git",
