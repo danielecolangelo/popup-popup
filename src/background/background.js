@@ -21,16 +21,27 @@ browser.menus.create({
 browser.menus.create({
 	id       : 'popup-popup-contextMenus-tab',
 	title    : 'Move in a Popup',
-	icons    : {
-		'16' : 'icons/fi-arrows-out.svg'
-	},
 	contexts : ['tab'],
-	onclick  : (info,tab) => {
-		browser.windows.create({
-			type   : 'popup',
-			tabId  : tab.id,
-			height : 360,
-			width  : 640
+	onclick  : moveToPopup,
+});
+
+/**
+ * Contextual menu to move a page into a popup
+ * and a popup back into a normal window
+ */
+browser.windows.onFocusChanged.addListener((windowID) => {
+	if( windowID && windowID > 0 ){
+		browser.windows.get(windowID).then((w) => {
+			let removePromise = browser.menus.remove('popup-popup-contextMenus-page');
+			switch (w.type) {
+				case 'normal':
+					lastActiveWindowID = windowID;
+					removePromise.then(createMoveInAPopup)
+					break;
+				case 'popup':
+					removePromise.then(createMoveBack)
+					break;
+			}
 		});
-	},
+	}
 });
