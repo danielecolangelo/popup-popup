@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Popup! Popup!</title>
+	<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+	<div class="panel-section panel-section-header">
+		<img src="../icons/logo.svg" alt="" class="text-section-icon">
+		<div class="text-section-header">Popup! Popup!</div>
+	</div>
+
+	<div id="buttons" class="panel-section-tabs">
+		<div class="browser-styleed panel-section-tabs-button" href="#" data-index="0">Normal</div>
+		<div class="panel-section-tabs-separator"></div>
+		<div class="browser-styleed panel-section-tabs-button" href="#" data-index="1">Popup</div>
+	</div>
+
+	<div id="panels">
+		<div id="panel-normal">
+			<!-- <div class="panel-section panel-section-header">
+				<div class="text-section-header">Click to Popup</div>
+			</div> -->
+			<div class="panel-section panel-section-list" data-type="normal"></div>
+		</div>
+
+		<div id="panel-popup">
+			<!-- <div class="panel-section panel-section-header">
+				<div class="text-section-header">Click to Popdown</div>
+			</div> -->
+			<div class="panel-section panel-section-list" data-type="popup"></div>
+		</div>
+	</div>
+
+	<footer class="panel-section panel-section-footer">
+		<div class="panel-section-footer-button">Settings</div>
+		<!-- <div class="panel-section-footer-separator"></div> -->
+		<!-- <div class="panel-section-footer-button default">Confirm</div> -->
+	</footer>
+	
+	<!-- <div class="panel-section-footer"> Test </div> -->
+
+	<script src="../lib/options.js"></script>
+	<script src="../background/functions.js"></script>
+	<script src="popup.js"></script>
+</body>
+</html>

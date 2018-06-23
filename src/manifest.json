@@ -16,6 +16,13 @@
 	"options_ui" : {
 		"page" : "options/options.html"
 	},
+	"browser_action" : {
+		"default_title": "Popup! Popup!",
+		"default_popup": "popup/popup.html",
+		"browser_style": true,
+		"default_icon" : "icons/logo.svg",
+		"default_area" : "tabstrip"
+	},
 	"permissions" : [
 		"menus",
 		"contextMenus",
