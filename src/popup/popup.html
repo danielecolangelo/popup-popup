@@ -8,7 +8,7 @@
 <body>
 	<div class="panel-section panel-section-header">
 		<img src="../icons/logo.svg" alt="" class="text-section-icon">
-		<div class="text-section-header">Popup! Popup!</div>
+		<div class="text-section-header">Manage your Popups!</div>
 	</div>
 
 	<div id="buttons" class="panel-section-tabs">
@@ -19,27 +19,18 @@
 
 	<div id="panels">
 		<div id="panel-normal">
-			<!-- <div class="panel-section panel-section-header">
-				<div class="text-section-header">Click to Popup</div>
-			</div> -->
-			<div class="panel-section panel-section-list" data-type="normal"></div>
+			<div class="panel-section panel-section-list" data-type="normal" data-actiontext="Move to a Popup ⮭"></div>
 		</div>
 
 		<div id="panel-popup">
-			<!-- <div class="panel-section panel-section-header">
-				<div class="text-section-header">Click to Popdown</div>
-			</div> -->
-			<div class="panel-section panel-section-list" data-type="popup"></div>
+			<div class="panel-section panel-section-list" data-type="popup" data-actiontext="Move to a Window ⮯"></div>
 		</div>
 	</div>
 
 	<footer class="panel-section panel-section-footer">
-		<div class="panel-section-footer-button">Settings</div>
-		<!-- <div class="panel-section-footer-separator"></div> -->
-		<!-- <div class="panel-section-footer-button default">Confirm</div> -->
+		<div id="settings-button" class="panel-section-footer-button">Settings</div>
 	</footer>
 	
-	<!-- <div class="panel-section-footer"> Test </div> -->
 
 	<script src="../lib/main.js"></script>
 	<script src="popup.js"></script>
