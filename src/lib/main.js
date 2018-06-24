@@ -40,8 +40,8 @@ var pplib = {
 		 * Move to popup
 		 */
 		toPopup : function(info,tab) {
-			pplib.getOptions().then( options => {
-				browser.windows.create({
+			return pplib.getOptions().then( options => {
+				return browser.windows.create({
 					type   : 'popup',
 					tabId  : tab.id,
 					height : parseInt(options['popup-height']),
@@ -54,16 +54,18 @@ var pplib = {
 		 * Move Popup Back into a window
 		 */
 		toWindow : function(info,tab) {
+			let win;
 			if (pplib.vars.lastActiveWindowID) {
-				let w = browser.windows.get(pplib.vars.lastActiveWindowID, { windowTypes : ['normal'] });
-				w.then( w => {
-					pplib.internal.move(w, tab)
-				}, e => {
-					pplib.internal.getAnotherWindow(tab);
-				})
+				win = browser.windows.get(pplib.vars.lastActiveWindowID, { windowTypes : ['normal'] })
+					.then( w => {
+						return pplib.internal.move(w, tab)
+					}, e => {
+						pplib.internal.getAnotherWindow(tab);
+					})
 			} else {
-				pplib.internal.getAnotherWindow(tab);
+				win = pplib.internal.getAnotherWindow(tab);
 			}
+			return win;
 		},
 	},
 
@@ -81,15 +83,13 @@ var pplib = {
 		 * if there are no normal windows create a new one
 		 */
 		getAnotherWindow : function (tab) {
-			browser.windows.getAll({
+			return browser.windows.getAll({
 				windowTypes : ['normal']
 			}).then( windowList => {
 				if( windowList.length > 0 ){
-					console.log(windowList)
-					let w = windowList[windowList.length - 1];
-					pplib.internal.move(w, tab)
+					return pplib.internal.move(windowList[windowList.length - 1], tab)
 				} else {
-					browser.windows.create({
+					return browser.windows.create({
 						type   : 'normal',
 						tabId  : tab.id
 					});
@@ -101,12 +101,12 @@ var pplib = {
 		 * Move the tab in the selected window
 		 */
 		move : function(w, tab) {
-			browser.tabs.move(tab.id, {
+			return browser.tabs.move(tab.id, {
 				windowId : w.id,
 				index    : -1
 			}).then( tabs => {
 				browser.windows.update(tabs[0].windowId, {focused: true});
-				browser.tabs.update(tabs[0].id, {active: true});
+				return browser.tabs.update(tabs[0].id, {active: true});
 			})
 		}
 	}

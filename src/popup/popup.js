@@ -29,37 +29,43 @@ var ppPopup = {
 			ppPopup.vars.panels[el.dataset.index].classList.remove('hidden');
 		},
 
-		populateList : (item, tabs, info) => {
-			let html = '';
-			
-			for (let i = 0; i < tabs.length; i++) {
-				html += '<div class="panel-list-item" data-id="' + tabs[i].id + '" data-type="' + item.classList.type + '">' + 
-							'<img src="' + (tabs[i].favIconUrl ? tabs[i].favIconUrl : ppPopup.vars.defaultFavicon) + '" alt="" class="icon" />' + 
-							'<div class="text">' + tabs[i].title + '</div>' + 
-						'</div>';
-			}
-			item.innerHTML = html;
+		populateLists : function(){
+			for (let index = 0; index < ppPopup.vars.lists.length; index++) {
+				
+				browser.tabs.query({windowType : ppPopup.vars.lists[index].dataset.type})
+					.then( (tabs) => {
+						let items = document.createDocumentFragment();
+						ppPopup.vars.lists[index].innerHTML = '';
 
-			let listItems = item.querySelectorAll('div.panel-list-item');
+						for (let i = 0; i < tabs.length; i++) {
+							let item = document.createElement('div');
 
-			for (var i = 0; i < listItems.length; i++) {
-				listItems[i].addEventListener('click', e => {
-					let el = e.currentTarget,
-						id = el.dataset.id ? parseInt(el.dataset.id) : 0,
-						moveTab = 'normal' === item.dataset.type ? pplib.action.toPopup : pplib.action.toWindow;
+							item.classList.add('panel-list-item');
 
-					moveTab(null,{id: id});
-					setTimeout(ppPopup.fn.resetLists, 300)
-				});
+							item.dataset.id = tabs[i].id,
+							item.dataset.type = ppPopup.vars.lists[index].dataset.type,
+
+							item.innerHTML = '<img src="' + (tabs[i].favIconUrl ? tabs[i].favIconUrl : ppPopup.vars.defaultFavicon) + '" alt="" class="icon" />' + 
+								'<div class="text">' + tabs[i].title + '</div>'; 
+
+							item.addEventListener('click', (e) => {
+								let el = e.currentTarget,
+									id = el.dataset.id ? parseInt(el.dataset.id) : 0,
+									moveTab = 'normal' === el.dataset.type ? pplib.action.toPopup : pplib.action.toWindow,
+									promise = moveTab(null,{id: id});
+
+								promise.then( (tab) => {
+									ppPopup.fn.populateLists();
+								})
+							});
+
+							items.appendChild(item);
+						}
+
+						ppPopup.vars.lists[index].appendChild(items);
+					} );
 			}
 		},
-
-		resetLists : function(){
-			for (var i = 0; i < ppPopup.vars.lists.length; i++) {
-				browser.tabs.query({windowType : ppPopup.vars.lists[i].dataset.type})
-					.then( ppPopup.fn.populateList.bind(null, ppPopup.vars.lists[i]));
-			}
-		}
 	}
 }
 
@@ -77,4 +83,4 @@ for (let i = 0; i < ppPopup.vars.buttons.length; i++) {
  * Populate lists
  */
 ppPopup.fn.selectOne({currentTarget : ppPopup.vars.buttons[0]});
-ppPopup.fn.resetLists();
+ppPopup.fn.populateLists();
