@@ -8,8 +8,7 @@
 	},
 	"background"       : {
 		"scripts" : [
-			"lib/options.js",
-			"background/functions.js",
+			"lib/main.js",
 			"background/background.js"
 		]
 	},

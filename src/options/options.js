@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', e => {
-	getOptions().then( options => {
+	pplib.getOptions().then( options => {
 		for (let key in options) {
 			document.querySelector('#' + key).value = options[key];
 		}
