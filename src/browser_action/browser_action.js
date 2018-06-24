@@ -44,6 +44,7 @@ var ppPopup = {
 
 							item.dataset.id = tabs[i].id,
 							item.dataset.type = ppPopup.vars.lists[index].dataset.type,
+							item.dataset.actiontext = ppPopup.vars.lists[index].dataset.actiontext,
 
 							item.innerHTML = '<img src="' + (tabs[i].favIconUrl ? tabs[i].favIconUrl : ppPopup.vars.defaultFavicon) + '" alt="" class="icon" />' + 
 								'<div class="text">' + tabs[i].title + '</div>'; 
@@ -84,3 +85,7 @@ for (let i = 0; i < ppPopup.vars.buttons.length; i++) {
  */
 ppPopup.fn.selectOne({currentTarget : ppPopup.vars.buttons[0]});
 ppPopup.fn.populateLists();
+
+document.querySelector('#settings-button').addEventListener( 'click', (e) => {
+	browser.runtime.openOptionsPage();
+});
