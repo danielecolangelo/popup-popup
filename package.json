@@ -1,6 +1,6 @@
 {
   "name": "popup-popup",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A WebExtension to open any URL in a popup",
   "dependencies": {},
   "devDependencies": {
