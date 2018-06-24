@@ -6,7 +6,7 @@ browser.menus.create({
 	title    : 'Open in a Popup',
 	contexts : ['link'],
 	onclick  : (info,tab) => {
-		getOptions().then( options => {
+		pplib.getOptions().then( options => {
 			browser.windows.create({
 				url    : info.linkUrl,
 				type   : 'popup',
@@ -24,7 +24,7 @@ browser.menus.create({
 	id       : 'popup-popup-contextMenus-tab',
 	title    : 'Move in a Popup',
 	contexts : ['tab'],
-	onclick  : moveToPopup,
+	onclick  : pplib.action.toPopup,
 });
 
 /**
@@ -37,11 +37,11 @@ browser.windows.onFocusChanged.addListener((windowID) => {
 			let removePromise = browser.menus.remove('popup-popup-contextMenus-page');
 			switch (w.type) {
 				case 'normal':
-					lastActiveWindowID = windowID;
-					removePromise.then(createMoveInAPopup)
+					pplib.vars.lastActiveWindowID = windowID;
+					removePromise.then(pplib.menu.toPopup)
 					break;
 				case 'popup':
-					removePromise.then(createMoveBack)
+					removePromise.then(pplib.menu.toWindow)
 					break;
 			}
 		});

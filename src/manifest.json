@@ -1,20 +1,25 @@
 {
 	"manifest_version" : 2,
 	"name"             : "Popup! Popup!",
-	"version"          : "0.2.0",
+	"version"          : "0.3.0",
 	"description"      : "Open any URL in a popup",
 	"icons"            : {
 		"16" : "icons/logo.svg"
 	},
 	"background"       : {
 		"scripts" : [
-			"lib/options.js",
-			"background/functions.js",
+			"lib/main.js",
 			"background/background.js"
 		]
 	},
 	"options_ui" : {
 		"page" : "options/options.html"
+	},
+	"browser_action" : {
+		"default_title": "Popup! Popup!",
+		"default_popup": "browser_action/browser_action.html",
+		"browser_style": true,
+		"default_icon" : "icons/logo.svg"
 	},
 	"permissions" : [
 		"menus",
