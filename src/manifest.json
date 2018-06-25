@@ -3,6 +3,11 @@
 	"name"             : "Popup! Popup!",
 	"version"          : "0.3.0",
 	"description"      : "Open any URL in a popup",
+	"applications"     : {
+		"gecko" : {
+			"id" : "{e8e1c2b5-60ae-45cf-b927-3ed3e6c50267}"
+		}
+	},
 	"icons"            : {
 		"16" : "icons/logo.svg"
 	},
