@@ -31,23 +31,31 @@ var ppPopup = {
 
 		populateLists : function(){
 			for (let index = 0; index < ppPopup.vars.lists.length; index++) {
+
+				let dataType = ppPopup.vars.lists[index].dataset.type,
+					dataActionText = ppPopup.vars.lists[index].dataset.actiontext;
 				
-				browser.tabs.query({windowType : ppPopup.vars.lists[index].dataset.type})
+				browser.tabs.query({windowType : dataType})
 					.then( (tabs) => {
 						let items = document.createDocumentFragment();
 						ppPopup.vars.lists[index].innerHTML = '';
 
 						for (let i = 0; i < tabs.length; i++) {
-							let item = document.createElement('div');
+							let item = document.createElement('div'),
+								icon = document.createElement('img'),
+								text = document.createElement('div');
 
 							item.classList.add('panel-list-item');
+							icon.classList.add('icon');
+							text.classList.add('text');
 
-							item.dataset.id = tabs[i].id,
-							item.dataset.type = ppPopup.vars.lists[index].dataset.type,
-							item.dataset.actiontext = ppPopup.vars.lists[index].dataset.actiontext,
+							item.dataset.id = tabs[i].id;
+							item.dataset.type = dataType;
+							item.dataset.actiontext = dataActionText;
 
-							item.innerHTML = '<img src="' + (tabs[i].favIconUrl ? tabs[i].favIconUrl : ppPopup.vars.defaultFavicon) + '" alt="" class="icon" />' + 
-								'<div class="text">' + tabs[i].title + '</div>'; 
+							icon.setAttribute('src', tabs[i].favIconUrl ? tabs[i].favIconUrl : ppPopup.vars.defaultFavicon);
+
+							text.innerText = tabs[i].title;
 
 							item.addEventListener('click', (e) => {
 								let el = e.currentTarget,
@@ -59,6 +67,9 @@ var ppPopup = {
 									ppPopup.fn.populateLists();
 								})
 							});
+
+							item.appendChild(icon);
+							item.appendChild(text);
 
 							items.appendChild(item);
 						}
