@@ -40,12 +40,12 @@ var pplib = {
 		 * Move to popup
 		 */
 		toPopup : function(info,tab) {
-			return pplib.getOptions().then( options => {
+			return pplib.options.default().then( options => {
 				return browser.windows.create({
 					type   : 'popup',
 					tabId  : tab.id,
-					height : parseInt(options['popup-height']),
-					width  : parseInt(options['popup-width'])
+					height : options['height'],
+					width  : options['width'],
 				});
 			});
 		},
@@ -69,12 +69,15 @@ var pplib = {
 		},
 	},
 
-	getOptions : function() {
-		return browser.storage.local.get({
-			'popup-width'  : 640,
-			'popup-height' : 360
-		});
-
+	options : {
+		default : function(){
+			return browser.storage.local.get({
+				default : {
+					width : 640,
+					height : 360
+				}
+			}).then( values => values.default );
+		}
 	},
 
 	internal : {

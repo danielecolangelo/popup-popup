@@ -1,0 +1,29 @@
+body {
+	padding-top: 20px;
+}
+
+div.fieldset {
+	position: relative;
+	border : 1px solid #ccc;
+	margin-bottom: 35px;
+}
+
+div.fieldset::before {
+	content: attr(data-legend);
+	position: absolute;
+	top: -12px;
+	left: 5px;
+	background: #fff;
+	padding: 2px 5px;
+	border: 1px solid #ccc;
+}
+
+div.fields {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 25px 0 0;
+}
+
+div.field {
+	padding: 0 10px 25px;
+}

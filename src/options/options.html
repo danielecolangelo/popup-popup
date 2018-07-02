@@ -2,18 +2,28 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="options.css">
 </head>
 <body>
-	<form>
-		<fieldset>
-			<legend>Popup default Size</legend>
-			<label>Width : <input id="popup-width" type="number" min="100" max="1920"></label>
-			<label>Height : <input id="popup-height" type="number" min="100" max="1080"></label>
-		</fieldset>
-		<p>
-			<button type="submit" class="button">Save</button>
-		</p>
-	</form>
+	<div id="form">
+		<div class="fieldset" data-legend="Popup default Size">
+			<div class="fields">
+				<div class="field">
+					<label for="default-width">Width : </label>
+					<input id="default-width" type="number" min="100" max="1920">
+				</div>
+
+				<div class="field">
+					<label for="default-height">Height : </label>
+					<input id="default-height" type="number" min="100" max="1080">
+				</div>
+
+				<div class="field">
+					<button id="default-submit" type="submit" class="browser-style default">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="../lib/main.js"></script>
 	<script src="options.js"></script>
