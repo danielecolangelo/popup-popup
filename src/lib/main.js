@@ -40,7 +40,7 @@ var pplib = {
 		 * Move to popup
 		 */
 		toPopup : function(info,tab) {
-			return pplib.options.default().then( options => {
+			return pplib.options.main().then( options => {
 				return browser.windows.create({
 					type   : 'popup',
 					tabId  : tab.id,
@@ -70,13 +70,20 @@ var pplib = {
 	},
 
 	options : {
-		default : function(){
+		main : function(){
 			return browser.storage.local.get({
-				default : {
-					width : 640,
-					height : 360
+				main : {
+					width : pplib.optionsDefault.main.width,
+					height : pplib.optionsDefault.main.height,
 				}
-			}).then( values => values.default );
+			}).then( values => values.main );
+		}
+	},
+
+	optionsDefault : {
+		main : {
+			width : 640,
+			height : 360
 		}
 	},
 

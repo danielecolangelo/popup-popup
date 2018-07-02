@@ -6,7 +6,7 @@ browser.menus.create({
 	title    : 'Open in a Popup',
 	contexts : ['link'],
 	onclick  : (info,tab) => {
-		pplib.options.default().then( options => {
+		pplib.options.main().then( options => {
 			browser.windows.create({
 				url    : info.linkUrl,
 				type   : 'popup',
