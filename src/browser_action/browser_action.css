@@ -4,37 +4,10 @@ html,body {
     width : 420px;
 }
 
-#zaa-list-current,
-#zaa-list-popups {
-	box-sizing: border-box;
-	padding: 20px 0;
-	/*max-height: 200px;*/
-	max-height: calc(50vw - 80px);
-	overflow-x: hidden;
-	overflow-y: scroll;
-}
-
 .panel-list-item{
 	position: relative;
 	cursor: pointer;
 }
-
-/* .panel-list-item::after{
-	content: attr(data-actiontext);
-	position: absolute; right: 2px; top: 2px; bottom: 2px;
-	background: #e2e2e2;
-	color: #000;
-	opacity: 0;
-	transition: opacity .3 ease;
-	padding: 1px 5px;
-	font-size: .8em;
-	border-radius: 5px;
-	box-shadow: 0 0 0 1px rgba(0,0,0,.2);
-}
-
-.panel-list-item:hover::after{
-	opacity: 1;
-} */
 
 .panel-section-list img.icon{
 	max-width  : 16px;
