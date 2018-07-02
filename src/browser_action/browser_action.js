@@ -7,6 +7,7 @@ var ppPopup = {
 		currentTab : document.querySelector('#current-tab-action'),
 		settingsButton : document.querySelector('#settings-button'),
 		defaultFavicon : browser.extension.getURL('icons/logo.svg'),
+		disabledFavicon : browser.extension.getURL('icons/disabled.svg'),
 	},
 
 	/**
@@ -15,6 +16,8 @@ var ppPopup = {
 	fn : {
 		populateLists : function(){
 			browser.tabs.query({windowType : 'popup'}).then(tabs => {
+				ppPopup.vars.listPopups.innerHTML = '';
+
 				for (let i = 0; i < tabs.length; i++) {
 					let items = document.createDocumentFragment();
 
@@ -50,6 +53,24 @@ var ppPopup = {
 
 					ppPopup.vars.listPopups.innerHTML = '';
 					ppPopup.vars.listPopups.appendChild(items);
+				}
+
+				if ( tabs.length < 1) {
+						let item = document.createElement('div'),
+							icon = document.createElement('img'),
+							text = document.createElement('div');
+
+						item.classList.add('panel-list-item');
+						icon.classList.add('icon');
+						text.classList.add('text');
+
+					text.innerText = 'You have no popups';
+					icon.setAttribute('src', ppPopup.vars.disabledFavicon);
+					
+					item.appendChild(icon);
+					item.appendChild(text);
+					
+					ppPopup.vars.listPopups.appendChild(item);
 				}
 			});
 		},
